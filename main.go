@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/lyft/protoc-gen-star"
-	"github.com/srikrsna/protoc-gen-gotag/module"
+	"github.com/amsokol/protoc-gen-gotag/module"
 )
 
 func main() {

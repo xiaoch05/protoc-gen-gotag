@@ -3,7 +3,7 @@ package module
 import (
 	"github.com/fatih/structtag"
 	"github.com/lyft/protoc-gen-star"
-	"github.com/srikrsna/protoc-gen-gotag/tagger"
+	"github.com/amsokol/protoc-gen-gotag/tagger"
 )
 
 type tagExtractor struct {
@@ -53,13 +53,6 @@ func (v *tagExtractor) VisitField(f pgs.Field) (pgs.Visitor, error) {
 		return nil, err
 	}
 
-	if !ok {
-		return v, nil
-	}
-
-	tags, err := structtag.Parse(tval)
-	v.CheckErr(err)
-
 	msgName := f.Message().Name().PGGUpperCamelCase().String()
 
 	if f.InOneOf() {
@@ -70,8 +63,13 @@ func (v *tagExtractor) VisitField(f pgs.Field) (pgs.Visitor, error) {
 		v.tags[msgName] = map[string]*structtag.Tags{}
 	}
 
-	v.tags[msgName][f.Name().PGGUpperCamelCase().String()] = tags
+	if ok {
+		tags, err := structtag.Parse(tval)
+		v.CheckErr(err)
 
+		v.tags[msgName][f.Name().PGGUpperCamelCase().String()] = tags
+	}
+	
 	return v, nil
 }
 

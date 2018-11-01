@@ -6,7 +6,7 @@ package example
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
-import _ "github.com/srikrsna/protoc-gen-gotag/tagger"
+import _ "github.com/amsokol/protoc-gen-gotag/tagger"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -56,27 +56,6 @@ func (m *Example) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_Example proto.InternalMessageInfo
 
-type isExample_OneOf interface {
-	isExample_OneOf()
-}
-
-type Example_A struct {
-	A string `protobuf:"bytes,5,opt,name=a,proto3,oneof" json:"A"`
-}
-type Example_BJk struct {
-	BJk int32 `protobuf:"varint,6,opt,name=b_jk,json=bJk,proto3,oneof" json:"b_Jk"`
-}
-
-func (*Example_A) isExample_OneOf()   {}
-func (*Example_BJk) isExample_OneOf() {}
-
-func (m *Example) GetOneOf() isExample_OneOf {
-	if m != nil {
-		return m.OneOf
-	}
-	return nil
-}
-
 func (m *Example) GetWithNewTags() string {
 	if m != nil {
 		return m.WithNewTags
@@ -96,6 +75,29 @@ func (m *Example) GetReplaceDefault() string {
 		return m.ReplaceDefault
 	}
 	return ""
+}
+
+type isExample_OneOf interface {
+	isExample_OneOf()
+}
+
+type Example_A struct {
+	A string `protobuf:"bytes,5,opt,name=a,proto3,oneof" json:"A"`
+}
+
+type Example_BJk struct {
+	BJk int32 `protobuf:"varint,6,opt,name=b_jk,json=bJk,proto3,oneof" json:"b_Jk"`
+}
+
+func (*Example_A) isExample_OneOf() {}
+
+func (*Example_BJk) isExample_OneOf() {}
+
+func (m *Example) GetOneOf() isExample_OneOf {
+	if m != nil {
+		return m.OneOf
+	}
+	return nil
 }
 
 func (m *Example) GetA() string {
