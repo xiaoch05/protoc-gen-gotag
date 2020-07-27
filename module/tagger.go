@@ -31,7 +31,6 @@ func (m *mod) Name() string {
 }
 
 func (m *mod) Execute(targets map[string]pgs.File, packages map[string]pgs.Package) []pgs.Artifact {
-	fmt.Println("Execute xxx process")
 	xtv := m.Parameters().Str("xxx")
 	xtv = strings.Replace(xtv, "+", ":", -1)
 	xt, err := structtag.Parse(xtv)
