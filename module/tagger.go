@@ -5,7 +5,6 @@ import (
 	"go/printer"
 	"go/token"
 	"strings"
-	"fmt"
 
 	"github.com/fatih/structtag"
 	pgs "github.com/lyft/protoc-gen-star"
